@@ -1,8 +1,8 @@
 locals {
-  aws_region   = "us-east-1"
-  company      = "sbc"
-  product      = "orbika"
-  environment  = var.branch_name
+  aws_region  = "us-east-1"
+  company     = "sbc"
+  product     = "orbika"
+  branch_name = "dev"
 
   vpc_dev_id            = "vpc-00793d68bfdbc5afd"
   subnet_private_dev_a  = "subnet-08f74d75acbf0c94a"
@@ -38,19 +38,19 @@ locals {
   id_account_stg = "563265230469"
   id_account_pro = "383012975894"
 
-  vpc_id                 = var.branch_name == "dev" ? local.vpc_dev_id : var.branch_name == "stg" ? local.vpc_stg_id : var.branch_name == "pro" ? local.vpc_pro_id : ""
-  subnet_private_a       = var.branch_name == "dev" ? local.subnet_private_dev_a : var.branch_name == "stg" ? local.subnet_private_stg_a : var.branch_name == "pro" ? local.subnet_private_pro_a : ""
-  subnet_private_b       = var.branch_name == "dev" ? local.subnet_private_dev_b : var.branch_name == "stg" ? local.subnet_private_stg_b : var.branch_name == "pro" ? local.subnet_private_pro_b : ""
-  security_group_id      = var.branch_name == "dev" ? local.security_group_dev_id : var.branch_name == "stg" ? local.security_group_stg_id : var.branch_name == "pro" ? local.security_group_pro_id : ""
-  task_definition_cpu    = var.branch_name == "dev" ? local.task_definition_cpu_dev : var.branch_name == "stg" ? local.task_definition_cpu_stg : var.branch_name == "pro" ? local.task_definition_cpu_pro : ""
-  task_definition_memory = var.branch_name == "dev" ? local.task_definition_memory_dev : var.branch_name == "stg" ? local.task_definition_memory_stg : var.branch_name == "pro" ? local.task_definition_memory_pro : ""
-  container_image_URI    = var.branch_name == "dev" ? local.container_image_uri_dev : var.branch_name == "stg" ? local.container_image_uri_stg : var.branch_name == "pro" ? local.container_image_uri_pro : ""
-  id_account_aws         = var.branch_name == "dev" ? local.id_account_dev : var.branch_name == "stg" ? local.id_account_stg : var.branch_name == "pro" ? local.id_account_pro : ""
+  vpc_id                 = branch_name == "dev" ? local.vpc_dev_id : branch_name == "stg" ? local.vpc_stg_id : branch_name == "pro" ? local.vpc_pro_id : ""
+  subnet_private_a       = branch_name == "dev" ? local.subnet_private_dev_a : branch_name == "stg" ? local.subnet_private_stg_a : branch_name == "pro" ? local.subnet_private_pro_a : ""
+  subnet_private_b       = branch_name == "dev" ? local.subnet_private_dev_b : branch_name == "stg" ? local.subnet_private_stg_b : branch_name == "pro" ? local.subnet_private_pro_b : ""
+  security_group_id      = branch_name == "dev" ? local.security_group_dev_id : branch_name == "stg" ? local.security_group_stg_id : branch_name == "pro" ? local.security_group_pro_id : ""
+  task_definition_cpu    = branch_name == "dev" ? local.task_definition_cpu_dev : branch_name == "stg" ? local.task_definition_cpu_stg : branch_name == "pro" ? local.task_definition_cpu_pro : ""
+  task_definition_memory = branch_name == "dev" ? local.task_definition_memory_dev : branch_name == "stg" ? local.task_definition_memory_stg : branch_name == "pro" ? local.task_definition_memory_pro : ""
+  container_image_URI    = branch_name == "dev" ? local.container_image_uri_dev : branch_name == "stg" ? local.container_image_uri_stg : branch_name == "pro" ? local.container_image_uri_pro : ""
+  id_account_aws         = branch_name == "dev" ? local.id_account_dev : branch_name == "stg" ? local.id_account_stg : branch_name == "pro" ? local.id_account_pro : ""
 
 
   tags = {
     origin     = "terraform"
-    enviroment = var.branch_name
+    enviroment = branch_name
     project    = "orbika"
   }
 }
