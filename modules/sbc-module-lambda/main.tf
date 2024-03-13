@@ -1,7 +1,3 @@
-variable "branch_name" {
-  description = "The name of the Lambda function"
-}
-
 variable "function_name" {
   description = "The name of the Lambda function"
 }
