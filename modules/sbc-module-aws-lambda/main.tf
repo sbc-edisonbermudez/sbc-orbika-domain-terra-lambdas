@@ -57,20 +57,13 @@ resource "aws_lambda_function" "lambda" {
   runtime          = "python3.10"
   filename         = "${path.module}/lambda_function.zip"
   timeout          = var.timeout
+  source_code_hash = filebase64sha256("${path.module}/lambda_function.zip")
 
   vpc_config {
     subnet_ids         = [var.subnet_a_id, var.subnet_b_id]
     security_group_ids = [var.security_group]
   }
   tags = var.tags
-
-  lifecycle {
-    ignore_changes = [
-      source_code_hash,
-      environment,
-      layers,
-    ]
-  }
 
 }
 
