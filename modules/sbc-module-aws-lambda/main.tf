@@ -11,6 +11,11 @@ variable "timeout" {
   default     = 25
 }
 
+variable "code_source_path" {
+  description = "Lambda file path"
+  default     = "${path.module}/lambda_function.zip"
+}
+
 variable "subnet_a_id" {
   description = "Lambda subnet_a"
   default     = ""
@@ -55,7 +60,7 @@ resource "aws_lambda_function" "lambda" {
   role             = aws_iam_role.lambda_role.arn
   handler          = "lambda_function.lambda_handler"
   runtime          = "python3.10"
-  filename         = "${path.module}/lambda_function.zip"
+  filename         = "${var.code_source_path}"
   timeout          = var.timeout
   source_code_hash = filebase64sha256("${path.module}/lambda_function.zip")
 
