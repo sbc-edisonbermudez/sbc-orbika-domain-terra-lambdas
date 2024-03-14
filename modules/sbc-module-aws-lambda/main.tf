@@ -62,7 +62,7 @@ resource "aws_lambda_function" "lambda" {
   runtime          = "python3.10"
   filename         = "${var.code_source_path}"
   timeout          = var.timeout
-  source_code_hash = filebase64sha256("${path.module}/lambda_function.zip")
+  source_code_hash = filebase64sha256("${var.code_source_path}")
 
   vpc_config {
     subnet_ids         = [var.subnet_a_id, var.subnet_b_id]
