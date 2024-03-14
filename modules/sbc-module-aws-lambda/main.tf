@@ -13,7 +13,7 @@ variable "timeout" {
 
 variable "code_source_path" {
   description = "Lambda file path"
-  default     = "${path.module}/lambda_function.zip"
+  default     = "${local.module}/lambda_function.zip"
 }
 
 variable "subnet_a_id" {
