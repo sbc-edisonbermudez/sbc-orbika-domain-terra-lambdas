@@ -13,7 +13,7 @@ variable "timeout" {
 
 variable "code_source_path" {
   description = "Lambda file path"
-  default     = local.module
+  default     = ""
 }
 
 variable "subnet_a_id" {
@@ -53,16 +53,16 @@ resource "aws_iam_role" "lambda_role" {
     ]
   })
 }
-
+ 
 // Aprovisiona la lambda
 resource "aws_lambda_function" "lambda" {
   function_name    = "${var.function_name}-lambda"
   role             = aws_iam_role.lambda_role.arn
   handler          = "lambda_function.lambda_handler"
   runtime          = "python3.10"
-  filename         = var.code_source_path
+  filename         = var.code_source_path  != "" ? var.code_source_path : local.module
   timeout          = var.timeout
-  source_code_hash = filebase64sha256("${var.code_source_path}")
+  source_code_hash = filebase64sha256("${var.code_source_path  != "" ? var.code_source_path : local.module}")
 
   vpc_config {
     subnet_ids         = [var.subnet_a_id, var.subnet_b_id]
