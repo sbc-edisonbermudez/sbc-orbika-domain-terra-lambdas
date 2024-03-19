@@ -1,3 +1,8 @@
+provider "aws" {
+  region = local.aws_region
+}
+
+
 variable "function_name" {
   description = "The name of the Lambda function"
 }
