@@ -53,7 +53,7 @@ resource "aws_iam_role" "lambda_role" {
     ]
   })
 }
- 
+
 // Aprovisiona la lambda
 resource "aws_lambda_function" "lambda" {
   function_name    = "${var.function_name}-lambda"
